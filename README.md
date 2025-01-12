@@ -2,3 +2,7 @@
 
 ##yarn add
 yarn add @react-three/fiber @react-three/drei three
+
+##활용한 3D파일 확장자
+
+<p>gltf파일</p>
