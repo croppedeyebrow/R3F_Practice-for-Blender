@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { Canvas } from "@react-three/fiber";
+import { useGLTF, OrbitControls } from "@react-three/drei";
+
+function Model() {
+  // useGLTF.preload를 추가하여 모델을 미리 로드
+  const { scene } = useGLTF("/character/character.gltf");
+  return <primitive object={scene} scale={1} position={[0, 0, 0]} />;
+}
+
+// 컴포넌트 외부에 preload 추가
+useGLTF.preload("/character/character.gltf");
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <Canvas camera={{ position: [0, 2, 5], fov: 45 }}>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+        <Model />
+        <OrbitControls />
+      </Canvas>
     </div>
   );
 }
